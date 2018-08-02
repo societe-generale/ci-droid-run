@@ -1,0 +1,15 @@
+version: "3.1"
+
+services:
+  rabbit-mq:
+    image: "????"
+    deploy:
+      replicas: 1
+  ci-droid-rest:
+    image: "ci-droid-rest"
+    deploy:
+      replicas: 1
+  ci-droid-tasks-consumer:
+    image: "ci-droid-tasks-consumer"
+    deploy:
+      replicas: 2

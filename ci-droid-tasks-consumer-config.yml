@@ -1,0 +1,73 @@
+info:
+  build:
+    artifact: "@project.artifactId@"
+    name: "@project.name@"
+    version: "@project.version@"
+
+spring:
+  application.name: ci-droid-tasks-consumer
+# ENABLE BELOW PROPERTIES IF YOU NEED EMAIL NOTIFICATIONS
+#  mail:
+#    protocol: smtp
+#    host: yourEmailGateway
+#    port: 25
+#    sender: ci-droid@yourDomain.com
+#    smtp:
+#      auth: false
+#      starttls.enable: false
+    # ----------------------------------------
+  # MESSAGING PROPERTIES
+  # ----------------------------------------
+  cloud:
+    stream:
+      default-binder: rabbit
+      bindings:
+        push-on-default-branch:
+          destination: live.ci-droid.github-push-events.default-branch.v1
+          content-type: application/json
+          group: live-ci-droid.github-events
+        pull-request-event:
+          destination: live.ci-droid.github-pull-request-events.v1
+          content-type: application/json
+          group: live-ci-droid.github-events
+        actions-to-perform:
+          destination: live.ci-droid.actions-to-perform.v1
+          content-type: application/json
+          group: live-ci-droid.github-events
+
+  rabbitmq:
+    addresses: localhost:5672
+    username: guest
+    password: guest
+    virtual-host: local
+    ssl:
+      enabled: false
+
+hystrix.command.default.execution.timeout.enabled: false
+feign.hystrix.enabled: false
+
+gitHub:
+  url: "https://yourGitHubEnterpriseUrl"
+  login: ${SERVICE_ACCOUNT_USERNAME}
+  password: ${SERVICE_ACCOUNT_PASSWORD}
+
+notifiers:
+  github.prComment.enable: true
+#  email.enable: true
+#  http.targetUrl: "http://localhost:9901/notify"
+
+ciDroidBehavior:
+  #  whenPushOnDefaultBranch:
+  tryToRebaseOpenPrs.enabled: true
+  notifyOwnerForNonMergeablePr.enabled: true
+  # whenPullRequestEvent:
+  bestPracticeNotifier.enabled: true
+  patternToResourceMapping:
+  # example of pattern :
+  #  "**/*Dto.java": "https://github.com/raw/societe-generale/ci-droid-run/master/ci-droid-best-practices/noDtoClass.md"
+
+
+logging:
+  level:
+    root: info
+

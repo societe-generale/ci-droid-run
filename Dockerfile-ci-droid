@@ -1,0 +1,30 @@
+FROM some java image
+
+# Create user and workdir for running application
+ENV USER_HOME /home/ci-droid
+ARG user=ci-droid
+ARG group=ci-droid
+ARG uid=1000
+ARG gid=1000
+
+ARG APPLI_NAME
+
+RUN groupadd -g ${gid} ${group} \
+    && useradd -d "${USER_HOME}" -u ${uid} -g ${gid} -m -s /bin/bash ${user}
+
+WORKDIR $USER_HOME
+
+COPY $APPLI_NAME.jar ./application.jar
+COPY $APPLI_NAME-config.yml ./application.yml
+
+
+COPY entrypoint.sh /
+RUN chown ci-droid:ci-droid /entrypoint.sh && \
+    chmod 755 /entrypoint.sh && \
+    chmod 400 /home/ci-droid/application.jar
+
+
+#switching to specific user
+USER ci-droid
+
+ENTRYPOINT ["/entrypoint.sh"]

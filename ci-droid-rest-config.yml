@@ -1,0 +1,39 @@
+info:
+  build:
+    artifact: "@project.artifactId@"
+    name: "@project.name@"
+    version: "@project.version@"
+
+spring:
+  application.name: ci-droid-rest
+
+  # ----------------------------------------
+  # MESSAGING PROPERTIES
+  # ----------------------------------------
+  cloud:
+    stream:
+      default-binder: rabbit
+      bindings:
+        push-on-default-branch:
+          destination: live.ci-droid.github-push-events.default-branch.v1
+          content-type: application/json
+        pull-request-event:
+          destination: live.ci-droid.github-pull-request-events.v1
+          content-type: application/json
+        actions-to-perform:
+          destination: live.ci-droid.actions-to-perform.v1
+          content-type: application/json
+
+  rabbitmq:
+    addresses: localhost:5672
+    username: guest
+    password: guest
+    virtual-host: local
+    ssl:
+      enabled: false
+
+logging:
+  level:
+    com.societegenerale.cidroid: INFO
+
+
