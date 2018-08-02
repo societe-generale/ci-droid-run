@@ -16,9 +16,10 @@ curl http://repo1.maven.org/maven2/com/societegenerale/ci-droid/ci-droid-starter
 echo "building $APPLI_NAME image.."
 docker build . -f Dockerfile-ci-droid --build-arg APPLI_NAME=$APPLI_NAME -t $APPLI_NAME
 
-# TODO
-#echo "starting Docker compose.."
-#docker-compose
+
+echo "starting Docker compose.."
+# taken from https://mindbyte.nl/2018/04/05/run-rabbitmq-using-docker-compose-with-guest-user.html
+docker-compose up
 
 
 

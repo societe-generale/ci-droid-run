@@ -1,4 +1,4 @@
-FROM some java image
+FROM openjdk:8-jre
 
 # Create user and workdir for running application
 ENV USER_HOME /home/ci-droid

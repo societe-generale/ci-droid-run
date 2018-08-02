@@ -1,15 +1,23 @@
 version: "3.1"
 
 services:
-  rabbit-mq:
-    image: "????"
-    deploy:
-      replicas: 1
+  rabbitmq:
+    image: "rabbitmq:3-management"
+    hostname: "rabbit"
+    ports:
+    - "15672:15672"
+    - "5672:5672"
+    labels:
+      NAME: "rabbitmq"
+    volumes:
+    - ./rabbitmq-isolated.conf:/etc/rabbitmq/rabbitmq.config
+
   ci-droid-rest:
-    image: "ci-droid-rest"
+    image: "ci-droid-rest:latest"
     deploy:
       replicas: 1
+
   ci-droid-tasks-consumer:
-    image: "ci-droid-tasks-consumer"
+    image: "ci-droid-tasks-consumer:latest"
     deploy:
       replicas: 2
