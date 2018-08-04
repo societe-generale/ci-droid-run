@@ -36,10 +36,11 @@ spring:
           group: live-ci-droid.github-events
 
   rabbitmq:
-    addresses: localhost:5672
+# in docker-compose.yml, rabbitmq is the name of the RabbitMq server
+    addresses: rabbitmq:5672
     username: guest
     password: guest
-    virtual-host: local
+    virtual-host: /
     ssl:
       enabled: false
 
