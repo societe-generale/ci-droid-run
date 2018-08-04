@@ -17,14 +17,15 @@ WORKDIR $USER_HOME
 COPY $APPLI_NAME.jar ./application.jar
 COPY $APPLI_NAME-config.yml ./application.yml
 
+RUN chown ci-droid:ci-droid ./application.jar && \
+    chown ci-droid:ci-droid ./application.yml
 
-COPY entrypoint.sh /
-RUN chown ci-droid:ci-droid /entrypoint.sh && \
-    chmod 755 /entrypoint.sh && \
-    chmod 400 /home/ci-droid/application.jar
+COPY entrypoint.sh ./
+RUN chown ci-droid:ci-droid ./entrypoint.sh && \
+    chmod 755 ./entrypoint.sh
 
 
 #switching to specific user
 USER ci-droid
 
-ENTRYPOINT ["/entrypoint.sh"]
+ENTRYPOINT ["./entrypoint.sh"]

@@ -64,7 +64,7 @@ ciDroidBehavior:
   bestPracticeNotifier.enabled: true
   patternToResourceMapping:
   # example of pattern :
-  #  "**/*Dto.java": "https://github.com/raw/societe-generale/ci-droid-run/master/ci-droid-best-practices/noDtoClass.md"
+    "**/*Dto.java": "https://github.com/raw/societe-generale/ci-droid-run/master/ci-droid-best-practices/noDtoClass.md"
 
 
 logging:
