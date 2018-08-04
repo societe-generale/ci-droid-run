@@ -11,9 +11,9 @@ If you want to deploy it further than on your machine, so that your team can ben
 
 You only need to have Docker and Docker-compose installed and working on your machine.
 
-### what the script does
+### What the script does
 
-The main script is [ci-droid-run-sh](./ci-droid-run.sh). It does simple things in sequence :
+The main script is [ci-droid-run.sh](./ci-droid-run.sh). It does simple things in sequence :
 1. download [CI-droid](https://github.com/societe-generale/ci-droid)  starter jar (the REST API part of it), and puts it with the proper config file, on top of a Java Docker image
 2. download [CI-droid-tasks-consumer](https://github.com/societe-generale/ci-droid-tasks-consumer/)  starter jar, and puts it with the proper config file, on top of a Java Docker image
 3. Using docker-compose, it starts :
@@ -21,9 +21,9 @@ The main script is [ci-droid-run-sh](./ci-droid-run.sh). It does simple things i
     - a CI-droid-rest instance, reachable on http://localhost:8080
     - 2 CI-droid-tasks-consumer instances
 
-### what to tweak
+### What to tweak
 
-#### Mandatory
+##### Mandatory
 
 -  CI-droid-tasks-consumer needs to be provided with some [github credentials](https://github.com/societe-generale/ci-droid-run/blob/38eab772b4da223c136d1c10e1fea4496b2b8722/ci-droid-tasks-consumer-config.yml#L52-L53) to perform some actions : to test, you can provide yours (but typically, you would put a service account with proper rights)
 -  The GitHubEnterprise URL on which CI-droid will perform tasks.
@@ -31,7 +31,7 @@ The main script is [ci-droid-run-sh](./ci-droid-run.sh). It does simple things i
     - An [issue](https://github.com/societe-generale/ci-droid-tasks-consumer/issues/8) is open to make it compatible with github.com
 
 
-#### Optional
+##### Optional
 
 - the [versions to use](https://github.com/societe-generale/ci-droid-run/blob/38eab772b4da223c136d1c10e1fea4496b2b8722/ci-droid-run.sh#L3-L4) for both jars. We'll try to update the scripts regularly with latest versions, but in case we forget, check yourself that you're using the latest versions.
 
@@ -39,5 +39,10 @@ The main script is [ci-droid-run-sh](./ci-droid-run.sh). It does simple things i
     - [ci-droid-rest-config.yml](./ci-droid-rest-config.yml)
     - [ci-droid-tasks-consumer-config.yml](./ci-droid-tasks-consumer-config.yml)
 
+#### Testing CI-droid
+
+Once you've tweaked what was needed and launched ci-droid-run.sh, CI-droid should now be running on your machine.. You can check that you can connect to RabbitMq management GUI on http://localhost:15672 (connect with guest/guest), and you should see exchanges and queues created with 2 consumers on queues)
+
+You should be able to send POST requests to http://localhost:8080/cidroid-webhook/ (with messages emitted by github as payload) or http://localhost:8080/cidroid-actions (with your own payload, according to [the documentation](https://github.com/societe-generale/ci-droid#ad-hoc-bulk-actions))
 
 
