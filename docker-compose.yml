@@ -14,10 +14,11 @@ services:
 
   ci-droid-rest:
     image: "ci-droid-rest:latest"
-    deploy:
-      replicas: 1
+    ports:
+    - "8080:8080"
 
-  ci-droid-tasks-consumer:
+  ci-droid-tasks-consumer_1:
     image: "ci-droid-tasks-consumer:latest"
-    deploy:
-      replicas: 2
+
+  ci-droid-tasks-consumer_2:
+    image: "ci-droid-tasks-consumer:latest"
