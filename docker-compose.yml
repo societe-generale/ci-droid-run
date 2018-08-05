@@ -9,8 +9,6 @@ services:
     - "5672:5672"
     labels:
       NAME: "rabbitmq"
-    volumes:
-    - ./rabbitmq-isolated.conf:/etc/rabbitmq/rabbitmq.config
 
   ci-droid-rest:
     image: "ci-droid-rest:latest"
