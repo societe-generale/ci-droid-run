@@ -39,6 +39,8 @@ The main script is [ci-droid-run.sh](./ci-droid-run.sh). It does simple things i
     - [ci-droid-rest-config.yml](./ci-droid-rest-config.yml)
     - [ci-droid-tasks-consumer-config.yml](./ci-droid-tasks-consumer-config.yml)
 
+- If you want to test features that involve emails, you'll obviously need to define your [email server](https://github.com/societe-generale/ci-droid-run/blob/564f6105eed4cb8dc63c99fc7042f3f76774a8db/ci-droid-tasks-consumer-config.yml#L12)
+
 #### Testing CI-droid
 
 Once you've tweaked what was needed and launched ci-droid-run.sh, CI-droid should now be running on your machine.. You can check that you can connect to RabbitMq management GUI on http://localhost:15672 (connect with guest/guest), and you should see exchanges and queues created with 2 consumers on queues)
