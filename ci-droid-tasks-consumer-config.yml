@@ -49,8 +49,8 @@ feign.hystrix.enabled: false
 
 gitHub:
   url: "https://yourGitHubEnterpriseUrl"
-  login: ${SERVICE_ACCOUNT_USERNAME}
-  password: ${SERVICE_ACCOUNT_PASSWORD}
+  login: TO_BE_REPLACED
+  password: TO_BE_REPLACED
 
 notifiers:
   github.prComment.enable: true
