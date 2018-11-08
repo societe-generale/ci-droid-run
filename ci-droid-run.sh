@@ -1,7 +1,7 @@
 #!/bin/bash
 
-CI_DROID_REST_VERSION="1.0.5"
-CI_DROID_TASKS_CONSUMER_VERSION="1.0.5"
+CI_DROID_REST_VERSION="1.0.7"
+CI_DROID_TASKS_CONSUMER_VERSION="1.0.8"
 
 echo "downloading CI-Droid REST part.."
 APPLI_NAME=ci-droid-rest
